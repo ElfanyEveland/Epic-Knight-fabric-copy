@@ -6,7 +6,11 @@ import com.mojang.math.Axis;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.architectury.registry.registries.RegistrySupplier;
+import com.magistuarmory.EpicKnights;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -55,7 +59,7 @@ public class PaviseBlock extends AbstractBannerBlock
 	
 	public PaviseBlock(DyeColor color, Properties prop, String shieldId, Supplier<BlockEntityType<PaviseBlockEntity>> entityType)
 	{
-		super(color, prop);
+		super(color, prop.setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(EpicKnights.ID, shieldId))));
 		this.shieldId = shieldId;
 		this.entityType = entityType;
 		this.codec = RecordCodecBuilder.mapCodec((instance) -> instance.group(DyeColor.CODEC.fieldOf("color").forGetter(AbstractBannerBlock::getColor), propertiesCodec()).apply(instance, (a, b) -> new PaviseBlock(a, b, shieldId, entityType)));
