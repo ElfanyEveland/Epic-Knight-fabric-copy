@@ -50,10 +50,10 @@ public class PaviseBlock extends AbstractBannerBlock
 	static final Vector3d BOXMAX = new Vector3d(1.0, 1.0, 1.0);
 	
 	public final MapCodec<PaviseBlock> codec;
-	private final BlockEntityType<PaviseBlockEntity> entityType;
+	private final Supplier<BlockEntityType<PaviseBlockEntity>> entityType;
 	protected String shieldId;
 	
-	public PaviseBlock(DyeColor color, Properties prop, String shieldId, BlockEntityType<PaviseBlockEntity> entityType)
+	public PaviseBlock(DyeColor color, Properties prop, String shieldId, Supplier<BlockEntityType<PaviseBlockEntity>> entityType)
 	{
 		super(color, prop);
 		this.shieldId = shieldId;
@@ -62,7 +62,7 @@ public class PaviseBlock extends AbstractBannerBlock
 	}
 	
 	public BlockEntityType<PaviseBlockEntity> getEntityType() {
-		return this.entityType;
+		return this.entityType.get();
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class PaviseBlock extends AbstractBannerBlock
 	@Override
 	public void destroy(LevelAccessor accessor, BlockPos blockpos, BlockState blockstate)
 	{
-		if (accessor.getBlockState(blockpos.above()).getBlock() == ModBlocks.PAVISE_UPPER_COLLISION)
+		if (accessor.getBlockState(blockpos.above()).getBlock() == ModBlocks.PAVISE_UPPER_COLLISION.get())
 			accessor.destroyBlock(blockpos.above(), false);
 		super.destroy(accessor, blockpos, blockstate);
 	}

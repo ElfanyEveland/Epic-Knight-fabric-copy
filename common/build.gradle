@@ -20,6 +20,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
     modImplementation "me.shedaniel.cloth:cloth-config:$rootProject.cloth_config_version"
+    // Needed for BlockEntity type builders in Minecraft 1.21.4
+    // 0.112.2+1.21.4 uses object-builder-api-v1 artifact version 18.0.8+d70d2c0604.
+    modImplementation "net.fabricmc.fabric-api:fabric-object-builder-api-v1:18.0.8+d70d2c0604"
 }
 
 sourceSets {

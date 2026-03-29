@@ -30,9 +30,9 @@ public class PaviseBlockEntity extends BlockEntity
     private boolean enchanted = false;
     private CompoundTag stackCompound;
 
-    public PaviseBlockEntity(BlockEntityType<PaviseBlockEntity> type, BlockPos blockpos, BlockState blockstate)
+    public PaviseBlockEntity(Supplier<BlockEntityType<PaviseBlockEntity>> type, BlockPos blockpos, BlockState blockstate)
     {
-        super(type, blockpos, blockstate);
+        super(type.get(), blockpos, blockstate);
         this.patterns = BannerPatternLayers.EMPTY;
     }
     
